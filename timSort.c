@@ -3,7 +3,7 @@
 #include <math.h>
 #include <time.h>
 
-#define RUN 32
+#define RUN 64 //taille maximale des segments à trier
 
 void insertionSort(int* arr, int left, int right){
     for(int i = left + 1; i <= right; i++){
@@ -83,7 +83,7 @@ int main()
 	printf("After Sorting Array is\n"); 
 	print_array(arr, n); 
 
-    int v = 1000000;
+    int v = 10000000;
     printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     int* tab = malloc(sizeof(int)*v);
     int* tab1 = malloc(sizeof(int)*v);
@@ -111,6 +111,7 @@ int main()
     //print_array(tab,v);
 
     printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-	printf("On remarque que le quick sort de la bibliothèque standard C est 3 fois plus rapide que le TimSort.\nMais cela dépend de plusieur paramêtre car plus la variance des nombres dans le tableau est faible plus rapide est notre algorithme;\n");
+	printf("On remarque que le quick sort de la bibliothèque standard C est 3 fois plus rapide que le TimSort.\nMais cela dépend de plusieur paramêtre car plus la variance des nombres dans \nle tableau est faible plus rapide est notre algorithme;\n");
+	printf("On peut aussi manipuler la constante RUN pour améliorer notre score\n");
 	return 0; 
 }
