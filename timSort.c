@@ -3,9 +3,10 @@
 #include <math.h>
 #include <time.h>
 
-#define RUN 64 //taille maximale des segments à trier
+#define RUN 16 //taille maximale des segments à trier
 
-void insertionSort(int* arr, int left, int right){
+void insertionSort(int* arr, int left, int right)
+{
     for(int i = left + 1; i <= right; i++){
         int temp = arr[i];
         int j = i - 1;
@@ -17,7 +18,8 @@ void insertionSort(int* arr, int left, int right){
     }
 }
 
-void merge(int* arr, int* temp, int l, int m, int r){
+void merge(int* arr, int* temp, int l, int m, int r)
+{
     int i = l, j = m + 1, k = l;
     while(i <= m && j <= r) {
         if(arr[i] <= arr[j])
@@ -33,11 +35,13 @@ void merge(int* arr, int* temp, int l, int m, int r){
         arr[i] = temp[i];
 }
 
-int min(int a, int b){
+int min(int a, int b)
+{
     return (a < b) ? a : b;
 }
 
-void tim_sort(int arr[], int n){
+void tim_sort(int arr[], int n)
+{
     int* temp = (int*)malloc(n * sizeof(int));
     for(int i = 0; i < n; i += RUN)
         insertionSort(arr, i, min((i + RUN - 1), (n - 1)));
@@ -83,7 +87,7 @@ int main()
 	printf("After Sorting Array is\n"); 
 	print_array(arr, n); 
 
-    int v = 10000000;
+    int v = 1000000;
     printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     int* tab = malloc(sizeof(int)*v);
     int* tab1 = malloc(sizeof(int)*v);
