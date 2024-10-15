@@ -5,34 +5,34 @@
 
 #define RUN 16 //taille maximale des segments à trier
 
-void insertionSort(int* arr, int left, int right)
+void insertion_sort(int* tab, int l, int r)
 {
-    for(int i = left + 1; i <= right; i++){
-        int temp = arr[i];
+    for(int i = l + 1; i <= r; i++){
+        int tmp = tab[i];
         int j = i - 1;
-        while (j >= left && arr[j] > temp) { 
-			arr[j + 1] = arr[j]; 
+        while (j >= l && tab[j] > tmp) { 
+			tab[j + 1] = tab[j]; 
 			j--; 
 		} 
-		arr[j + 1] = temp; 
+		tab[j + 1] = tmp; 
     }
 }
 
-void merge(int* arr, int* temp, int l, int m, int r)
+void merge(int* tab, int* tmp, int l, int m, int r)
 {
     int i = l, j = m + 1, k = l;
     while(i <= m && j <= r) {
-        if(arr[i] <= arr[j])
-            temp[k++] = arr[i++];
+        if(tab[i] <= tab[j])
+            tmp[k++] = tab[i++];
         else
-            temp[k++] = arr[j++];
+            tmp[k++] = tab[j++];
     }
     while(i <= m)
-        temp[k++] = arr[i++];
+        tmp[k++] = tab[i++];
     while(j <= r)
-        temp[k++] = arr[j++];
+        tmp[k++] = tab[j++];
     for(i = l; i <= r; i++)
-        arr[i] = temp[i];
+        tab[i] = tmp[i];
 }
 
 int min(int a, int b)
@@ -40,27 +40,27 @@ int min(int a, int b)
     return (a < b) ? a : b;
 }
 
-void tim_sort(int arr[], int n)
+void tim_sort(int tab[], int n)
 {
-    int* temp = (int*)malloc(n * sizeof(int));
+    int* tmp = (int*)malloc(n * sizeof(int));
     for(int i = 0; i < n; i += RUN)
-        insertionSort(arr, i, min((i + RUN - 1), (n - 1)));
+        insertion_sort(tab, i, min((i + RUN - 1), (n - 1)));
     for(int size = RUN; size < n; size = 2 * size) {
-        for(int left = 0; left < n; left += 2 * size){
-            int mid = left + size - 1;
-            int right = min((left + 2 * size - 1), (n - 1));
-            if(mid < right)
-                merge(arr, temp, left, mid, right);
+        for(int l = 0; l < n; l += 2 * size){
+            int mid = l + size - 1;
+            int r = min((l + 2 * size - 1), (n - 1));
+            if(mid < r)
+                merge(tab, tmp, l, mid, r);
         }
     }
-    free(temp);
+    free(tmp);
 }
 
 
-void print_array(int arr[], int n) 
+void print_array(int tab[], int n) 
 { 
 	for (int i = 0; i < n; i++) 
-		printf("%d ", arr[i]); 
+		printf("%d ", tab[i]); 
 	printf("\n"); 
 } 
 
@@ -75,17 +75,17 @@ int compareValeurs(const void* val1, const void* val2)
 
 int main() 
 { 
-	int arr[] = { -2, 7, 15, -14, 0, 15, 0, 7, 
+	int tab[] = { -2, 7, 15, -14, 0, 15, 0, 7, 
 				-7, -4, -13, 5, 8, -14, 12 }; 
-	int n = sizeof(arr) / sizeof(arr[0]); 
+	int n = sizeof(tab) / sizeof(tab[0]); 
 	printf("Given Array is\n"); 
-	print_array(arr, n); 
+	print_array(tab, n); 
 
 	// Function Call 
-	tim_sort(arr, n); 
+	tim_sort(tab, n); 
 
 	printf("After Sorting Array is\n"); 
-	print_array(arr, n); 
+	print_array(tab, n); 
 
     int v = 1000000;
     printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
